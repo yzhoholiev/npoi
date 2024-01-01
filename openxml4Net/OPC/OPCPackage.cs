@@ -94,10 +94,6 @@ namespace NPOI.OpenXml4Net.OPC
          */
         public OPCPackage(PackageAccess access)
         {
-            if (GetType() != typeof(ZipPackage))
-            {
-                throw new ArgumentException("PackageBase may not be subclassed");
-            }
             Init();
             this.packageAccess = access;
         }
