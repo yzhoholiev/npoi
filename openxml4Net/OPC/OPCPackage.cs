@@ -94,7 +94,8 @@ namespace NPOI.OpenXml4Net.OPC
          */
         public OPCPackage(PackageAccess access)
         {
-            if (GetType() != typeof(ZipPackage))
+            Type currentType = GetType();
+            if (currentType != typeof(ZipPackage) && currentType != typeof(TempFileZipPackage))
             {
                 throw new ArgumentException("PackageBase may not be subclassed");
             }
