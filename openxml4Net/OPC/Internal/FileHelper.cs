@@ -60,6 +60,15 @@ namespace NPOI.OpenXml4Net.OPC.Internal
             return "";
         }
 
+        public static FileStream GetTempFileStream()
+        {
+            string fileName = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+
+            return File.Create(
+                fileName,
+                8192,
+                FileOptions.DeleteOnClose | FileOptions.Asynchronous);
+        }
     }
 
 }

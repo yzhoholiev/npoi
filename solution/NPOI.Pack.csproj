@@ -5,7 +5,7 @@
   <PropertyGroup>
     <TargetFrameworks>net472;netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <PackageId>NPOI</PackageId>
+    <PackageId>Emerge.NPOI</PackageId>
     <OutputPath>..\solution\$(Configuration)\</OutputPath>
   </PropertyGroup>
 
