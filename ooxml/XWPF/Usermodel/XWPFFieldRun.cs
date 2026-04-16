@@ -42,8 +42,8 @@ namespace NPOI.XWPF.UserModel
 
         public string FieldInstruction
         {
-            get { return field.instr; }
-            set { field.instr = value; }
+            get { return this.field.instr; }
+            set { this.field.instr = value; }
         }
     }
 
