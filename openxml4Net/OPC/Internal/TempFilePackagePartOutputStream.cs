@@ -1,5 +1,5 @@
-﻿using System.IO;
-using System;
+﻿using System;
+using System.IO;
 
 namespace NPOI.OpenXml4Net.OPC.Internal;
 
@@ -9,8 +9,7 @@ public sealed class TempFilePackagePartOutputStream : Stream
 
     public TempFilePackagePartOutputStream(TempFilePackagePart part)
     {
-        part._data = FileHelper.GetTempFileStream();
-        _buff = part._data;
+        _buff = part.ReplaceData();
     }
 
     public override bool CanRead => false;
@@ -29,7 +28,7 @@ public sealed class TempFilePackagePartOutputStream : Stream
 
     public override int Read(byte[] buffer, int offset, int count)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
     public override void SetLength(long value)
@@ -42,29 +41,14 @@ public sealed class TempFilePackagePartOutputStream : Stream
         return _buff.Seek(offset, origin);
     }
 
-    /**
-     * Close this stream and flush the content.
-     * @see #flush()
-     */
     public override void Close()
     {
         Flush();
     }
 
-    /**
-     * Flush this output stream. This method is called by the close() method.
-     * Warning : don't call this method for output consistency.
-     * @see #close()
-     */
     public override void Flush()
     {
         _buff.Flush();
-
-        /*
-         * Clear this streams buffer, in case flush() is called a second time
-         * Fix bug 1921637 - provided by Rainer Schwarze
-         */
-        _buff.Position = 0;
     }
 
     public void Write(int b)
@@ -79,6 +63,6 @@ public sealed class TempFilePackagePartOutputStream : Stream
 
     public void Write(byte[] buffer)
     {
-        _buff.Write(buffer, (int)_buff.Position, buffer.Length);
+        _buff.Write(buffer, 0, buffer.Length);
     }
 }
