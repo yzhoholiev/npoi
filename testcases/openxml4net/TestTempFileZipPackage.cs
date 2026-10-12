@@ -10,6 +10,7 @@ namespace TestCases.OpenXml4Net.OPC
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
     using NUnit.Framework;
+    using NUnit.Framework.Legacy;
 
     [TestFixture]
     public class TestTempFileZipPackage
@@ -22,8 +23,8 @@ namespace TestCases.OpenXml4Net.OPC
             using TempFileZipPackage package = OpenEmptyWorkbookPackage();
             PackagePart part = CreatePart(package, Encoding.ASCII.GetBytes("part content"));
 
-            Assert.AreEqual("part content", ReadAll(part));
-            Assert.AreEqual("part content", ReadAll(part));
+            ClassicAssert.AreEqual("part content", ReadAll(part));
+            ClassicAssert.AreEqual("part content", ReadAll(part));
         }
 
         [Test]
@@ -36,7 +37,7 @@ namespace TestCases.OpenXml4Net.OPC
             {
                 var workbook = new XSSFWorkbook(package);
                 workbook.AddPicture(picture, PictureType.PNG);
-                Assert.AreEqual(picture, workbook.GetAllPictures().Cast<XSSFPictureData>().Single().Data);
+                ClassicAssert.AreEqual(picture, workbook.GetAllPictures().Cast<XSSFPictureData>().Single().Data);
 
                 using var output = new MemoryStream();
                 workbook.Write(output, true);
@@ -44,7 +45,7 @@ namespace TestCases.OpenXml4Net.OPC
             }
 
             var reopened = new XSSFWorkbook(new MemoryStream(saved));
-            Assert.AreEqual(picture, reopened.GetAllPictures().Cast<XSSFPictureData>().Single().Data);
+            ClassicAssert.AreEqual(picture, reopened.GetAllPictures().Cast<XSSFPictureData>().Single().Data);
         }
 
         [Test]
@@ -56,8 +57,8 @@ namespace TestCases.OpenXml4Net.OPC
 
             WriteAll(part, Encoding.ASCII.GetBytes("second"));
 
-            Assert.AreEqual("second", ReadAll(part));
-            Assert.IsFalse(File.Exists(firstFile));
+            ClassicAssert.AreEqual("second", ReadAll(part));
+            ClassicAssert.IsFalse(File.Exists(firstFile));
         }
 
         [Test]
@@ -73,7 +74,7 @@ namespace TestCases.OpenXml4Net.OPC
                 output.Write(Encoding.ASCII.GetBytes("def"), 0, 3);
             }
 
-            Assert.AreEqual("abcdef", ReadAll(part));
+            ClassicAssert.AreEqual("abcdef", ReadAll(part));
         }
 
         [Test]
@@ -88,7 +89,7 @@ namespace TestCases.OpenXml4Net.OPC
                 output.Write(Encoding.ASCII.GetBytes("de"));
             }
 
-            Assert.AreEqual("abcde", ReadAll(part));
+            ClassicAssert.AreEqual("abcde", ReadAll(part));
         }
 
         [Test]
@@ -100,7 +101,7 @@ namespace TestCases.OpenXml4Net.OPC
 
             part.Load(new MemoryStream(Encoding.ASCII.GetBytes("loaded")));
 
-            Assert.AreEqual("loaded", ReadAll(part));
+            ClassicAssert.AreEqual("loaded", ReadAll(part));
         }
 
         [Test]
@@ -112,10 +113,10 @@ namespace TestCases.OpenXml4Net.OPC
             {
                 PackagePart part = CreatePart(package, Encoding.ASCII.GetBytes("part content"));
                 tempFile = GetTempFileName(part);
-                Assert.IsTrue(File.Exists(tempFile));
+                ClassicAssert.IsTrue(File.Exists(tempFile));
             }
 
-            Assert.IsFalse(File.Exists(tempFile));
+            ClassicAssert.IsFalse(File.Exists(tempFile));
         }
 
         [Test]
@@ -131,9 +132,9 @@ namespace TestCases.OpenXml4Net.OPC
                 tempFiles = package.GetParts().OfType<TempFilePackagePart>().Select(GetTempFileName).Where(name => name != null).ToArray();
             }
 
-            Assert.IsNotEmpty(tempFiles);
+            ClassicAssert.IsNotEmpty(tempFiles);
             package.Dispose();
-            Assert.IsEmpty(tempFiles.Where(File.Exists));
+            ClassicAssert.IsEmpty(tempFiles.Where(File.Exists));
         }
 
         private static TempFileZipPackage OpenEmptyWorkbookPackage()

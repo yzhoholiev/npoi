@@ -20,7 +20,19 @@ public class TempFileZipPackage : ZipPackage, IDisposable
     {
     }
 
-    public void Dispose()
+    public new void Dispose()
+    {
+        try
+        {
+            base.Dispose();
+        }
+        finally
+        {
+            DeleteTempFiles();
+        }
+    }
+
+    private void DeleteTempFiles()
     {
         if (partList is null)
         {
