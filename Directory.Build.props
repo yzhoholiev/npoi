@@ -19,8 +19,7 @@
     <Summary>NPOI can read and write xls (Excel 97-2003), xlsx(Excel 2007+) and docx(Word 2007+). </Summary>
     <RepositoryUrl>https://github.com/nissl-lab/npoi</RepositoryUrl>
       
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageLicenseFile>OSMFEULA.txt</PackageLicenseFile>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>logo\60_60.jpg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>http://nissl-lab.github.io/npoi/</PackageProjectUrl>
@@ -112,11 +111,9 @@
 
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" Visible="false" PackagePath="" />
-    <None Include="..\OSMFEULA.txt" Pack="true" Visible="false" PackagePath="" />
     <None Include="..\build\README.md" Pack="true" Visible="false" PackagePath="" />
     <None Include="..\logo\*.png" Pack="true" Visible="false" PackagePath="logo\" />
     <None Include="..\logo\*.jpg" Pack="true" Visible="false" PackagePath="logo\" />
-    <None Include="..\build\NPOI.targets" Pack="true" Visible="false" PackagePath="build\" />
   </ItemGroup>
 
 </Project>
