@@ -4,7 +4,7 @@
   
   <PropertyGroup>
     <TargetFrameworks>net472;netstandard2.0;netstandard2.1;net8.0;net10.0</TargetFrameworks>
-    <PackageId>NPOI</PackageId>
+    <PackageId>Emerge.ThirdParty.NPOI</PackageId>
     <OutputPath>..\solution\$(Configuration)\</OutputPath>
     <PublishPath>..\publish\</PublishPath>  
     <IncludeAllProjectOutputsInPackage>false</IncludeAllProjectOutputsInPackage>
